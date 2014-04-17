@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+    </head>
+    <body>
+        <div id="myId">TODO write content</div>
+
+        <script>
+            'use strict';
+            var oneSingleton = (function() {
+
+                var instance;
+
+                function init() {
+
+                    //singleton pattern
+
+                    //Private method and variables
+                    function privateMethod() {
+                        console.log('metodo privado');
+                    }
+
+                    var privateVariable = 'variavel privada';
+
+                    var privateRandomNumber = Math.random();
+
+                    return {
+                        publicMethod: function() {
+                            console.log('resultado de função publica');
+                        },
+                        publicProperty: 'sou uma variavel publica',
+                        getRandomNumber: function() {
+                            return privateRandomNumber;
+                        }
+
+                    };
+                }
+
+                return {
+                    //Get Singleton or Create one
+                    getInstance: function() {
+
+                        if (!instance) {
+                            instance = init();
+                        }
+                        return instance;
+                    }
+                };
+
+            })();
+
+            var singletonA = oneSingleton.getInstance();
+            var singletonB = oneSingleton.getInstance();
+            console.log(singletonA.getRandomNumber() + ' ' + singletonB.getRandomNumber());
+
+            //Model Pattern self-containned
+            var modelPattern = (function() {
+
+                    var privateVariable = Math.random();
+
+                    function privateFunction() {
+                        var phrase = 'a variavel é ' + privateVariable;
+                        return phrase;
+                    }
+
+                    return {
+                        modelPatternPublic: function() {
+                            var getFunction = privateFunction();
+                            return getFunction;
+                        }
+                    };
+            })();
+            
+            console.log(modelPattern.modelPatternPublic());
+
+            //Model Pattern import  
+            var myModelImport = (function(col, val) {
+
+                function privateMethod1() {
+                    console.log(9 + col);
+                }
+                ;
+                function privateMethod2() {
+                    console.log(9 + val);
+                }
+                ;
+
+                return{
+                    publicFunction: function() {
+                        return privateMethod1();
+                    }
+                };
+
+            })(2, 1);
+
+            myModelImport.publicFunction();
+            
+            //Model Pattern export 
+            var myModelExport = (function() {
+                var model = {};
+
+                function privateFunction() {
+                    var x = 1;
+                    return x;
+                };
+
+                var privateVariable = 2;
+
+                model.publicFunction1 = function() {
+                    return privateFunction();
+                };
+                model.publicFunction2 = function() {
+                    return privateVariable;
+                };
+
+                return model;
+
+            })();
+
+            console.log(myModelExport.publicFunction1() + ' ' + myModelExport.publicFunction2());
+
+            //Constructor Pattern
+            var myConstructor = (function(id, name, age){
+                
+                var privateVariable = id + 'blah';                    
+                
+                this.publicName = name;
+                this.publicAge = age;
+                this.publicFunction = function(){
+                    console.log(privateVariable);
+                };
+            });
+            
+            var instanceConstructor = new myConstructor(1,'Paulo',36); 
+            
+            console.log(instanceConstructor.publicName);
+            instanceConstructor.publicFunction();
+            
+            
+            //Object Literal
+            var pessoa = new Object();
+            pessoa.nome  = 'Paulo';
+            pessoa.idade = '36';
+            
+            console.log(pessoa.nome);
+            
+            //EVENTS ADD DISPATCH CUSTOM
+            
+            function eventHandler(){
+                console.log(event.target.id);
+                dispatchEvent(costumeEvent);
+            }
+             
+            function importObjHandler(e){
+                console.log(e.idade);
+            };
+            
+            var el = document.getElementById('myId');
+
+            el.addEventListener('click', eventHandler, false);
+             
+            var customEvent = new Event('build', importObjHandler(pessoa), false);
+    
+            //
+            var test = {
+                
+                publicModel1 : function(){
+                    console.log('hello public1');
+                },
+                
+                publicModel2 : function(){
+                    console.log('hello public2');
+                }
+            };
+            
+            test.publicModel1();
+            
+        </script>
+    </body>
+</html>
