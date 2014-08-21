@@ -1,0 +1,75 @@
+<html>
+<head>
+
+	<script>
+
+
+	/*EXAMPLE WITH LITERAL*/
+	var data = {
+    	fname: "foo",
+    	addOne: function(num){ return num + 1}
+	}
+ 
+	console.log(data.fname)
+	console.log(data.addOne(4))
+ 
+	data.fname = "bar";
+	console.log(data.fname)
+ 
+	data.lname = "baz";
+	console.log(data.lname)
+ 
+	data.say = function(){ return "this is the say function" };
+	console.log( data.say() );
+
+	/*EXAMPLES WITH INSTANCE
+	function Car(make, model, year) {
+  		this.make = make;
+  		this.model = model;
+  		this.year = year;
+	}	
+	var mycar = new Car("Honda", "Accord", 1998);
+	var a = mycar instanceof Car;    // returns true
+	var b = mycar instanceof Object; // returns true
+	*/
+	
+	/*EXAMPLE 2*/
+	function hello ( name, word, verb ) {
+		this.name = name;
+		this.word = word;
+		this.verb = verb;
+		console.log( name  + ' ' + verb + ' ' + word);
+	}
+
+	var hello1 = new hello ( 'we', 'js', 'like' );
+	var hello2 = new hello ( 'we', 'happy', 'work' );
+
+	var check = hello2 instanceof hello;
+	console.log(check);
+
+	/*EXAMPLE 3*/
+	var Foo = function(){
+    	var _color= "blue";
+    	console.log("welcome to your new instance object");
+    	this.getColor = function(){
+        	return _color;
+    	}
+    	this.setColor = function(newColor){
+       	_color = newColor;
+    	}
+	}
+ 
+	var bar = new Foo(); // "welcome to your new instance object"
+	console.log(bar._color); // undefined
+	console.log(bar.getColor()); // "blue"
+	bar.setColor("red");
+	console.log(bar.getColor()); // "red"
+
+
+	</script>
+
+</head>	
+<body>
+
+</body>
+</html>
